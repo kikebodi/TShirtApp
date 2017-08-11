@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kikebodi.tshirtapp.MainActivity;
 import com.kikebodi.tshirtapp.apiconnection.models.Tshirt;
 
 import java.util.List;
@@ -27,11 +28,13 @@ public class ApiConnectionManager {
     public static final String URL = "https://mock-shirt-backend.getsandbox.com/";
     private static final String TAG = ApiConnectionManager.class.getName();
     private final SandboxApi sandboxApi;
+    private MainActivity mainActivity;
 
     //Test driven variables
     public static boolean successfullGetRequest  = false;
 
-    public ApiConnectionManager(){
+    public ApiConnectionManager(MainActivity mActivity){
+        this.mainActivity = mActivity;
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
@@ -62,7 +65,7 @@ public class ApiConnectionManager {
                 successfullGetRequest = (statusCode == 200);
 
                 List<Tshirt> tshirts = response.body();
-                String s = null;
+                mainActivity.prepareItems(tshirts);
             }
 
             @Override

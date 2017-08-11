@@ -50,4 +50,31 @@ public class Tshirt {
         this.picture = picture;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
 }
