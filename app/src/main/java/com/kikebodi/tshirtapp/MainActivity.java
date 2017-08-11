@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.kikebodi.tshirtapp.apiconnection.ApiConnectionManager;
 import com.kikebodi.tshirtapp.apiconnection.models.Tshirt;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create global configuration and initialize ImageLoader with this config
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoader.getInstance().init(config);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mAdapter = new CustomAdapter(itemList);
