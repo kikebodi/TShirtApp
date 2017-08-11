@@ -1,5 +1,4 @@
-package com.kikebodi.tshirtapp;
-
+package com.kikebodi.tshirtapp.main_list;
 
 
 import android.app.Fragment;
@@ -13,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kikebodi.tshirtapp.R;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
+import com.kikebodi.tshirtapp.details.ShirtDetailFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,10 @@ public class ItemListFragment extends Fragment {
                 Log.d(TAG, "Clicked position "+position);
                 try{
                     Shirt item = itemList.get(position);
+                    ShirtDetailFragment newFragment = new ShirtDetailFragment();
+                    newFragment.setShirt(item);
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.your_placeholder,new ShirtDetailFragment());
+                    fragmentTransaction.replace(R.id.your_placeholder,newFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }catch (Exception e){

@@ -3,10 +3,11 @@ package com.kikebodi.tshirtapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.kikebodi.tshirtapp.apiconnection.ApiConnectionManager;
+import com.kikebodi.tshirtapp.main_list.ItemListFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 

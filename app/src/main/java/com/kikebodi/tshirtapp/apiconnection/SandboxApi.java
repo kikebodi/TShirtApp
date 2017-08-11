@@ -13,7 +13,7 @@ import retrofit2.http.GET;
  * bodi.inf@gmail.com
  */
 
-public interface SandboxApi {
+interface SandboxApi {
 
     @GET("shirts")
     Call<List<Shirt>> getTshirts();

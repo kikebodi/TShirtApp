@@ -5,8 +5,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kikebodi.tshirtapp.ItemListFragment;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
+import com.kikebodi.tshirtapp.main_list.ItemListFragment;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiConnectionManager {
 
-    public static final String URL = "https://mock-shirt-backend.getsandbox.com/";
+    private static final String URL = "https://mock-shirt-backend.getsandbox.com/";
     private static final String TAG = ApiConnectionManager.class.getName();
     private final SandboxApi sandboxApi;
     private Fragment myFragment;
