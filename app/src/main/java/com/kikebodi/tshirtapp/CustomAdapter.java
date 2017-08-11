@@ -44,7 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.shirt_list_row, parent, false);
+                .inflate(R.layout.shirt_card_view, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -53,8 +53,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Tshirt item = itemsList.get(position);
         holder.title.setText(item.getName());
-        holder.price.setText(String.valueOf(item.getPrice()));
-        holder.color.setText(item.getColour());
+        holder.price.setText("$"+String.valueOf(item.getPrice()));
         imageLoader.displayImage(item.getPicture(), holder.image);
     }
 

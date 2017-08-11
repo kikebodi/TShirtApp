@@ -3,6 +3,7 @@ package com.kikebodi.tshirtapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mAdapter = new CustomAdapter(itemList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
@@ -41,20 +42,13 @@ public class MainActivity extends AppCompatActivity {
         apiManager.getTshirtsFromAPI();
     }
 
-    private void prepareItems() {
-
-        Tshirt one = new Tshirt(999999,"Normal t", 88, "Black",1,"M","url");
-        Tshirt two = new Tshirt(999999,"Normal 222", 88, "Black",1,"M","url");
-        Tshirt three = new Tshirt(999999,"Normal 333", 88, "Black",1,"M","url");
-        itemList.add(one);
-        itemList.add(two);
-        itemList.add(three);
-        mAdapter.notifyDataSetChanged();
-    }
-
     public void prepareItems(List<Tshirt> list){
+        if(list == null) return;
+
         for (Tshirt element : list) {
-            itemList.add(element);
+            if(element.getQuantity() > 0){
+                itemList.add(element);
+            }
         }
         mAdapter.notifyDataSetChanged();
     }
