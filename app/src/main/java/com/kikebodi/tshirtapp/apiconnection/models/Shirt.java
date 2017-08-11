@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * bodi.inf@gmail.com
  */
 
-public class Tshirt {
+public class Shirt {
 
     @SerializedName("id")
     @Expose
@@ -36,10 +36,10 @@ public class Tshirt {
     /**
      * No args constructor for use in serialization
      */
-    public Tshirt(){
+    public Shirt(){
     }
 
-    public Tshirt(long id, String name, long price, String colour, int quantity, String size, String picture){
+    public Shirt(long id, String name, long price, String colour, int quantity, String size, String picture){
         super();
         this.id = id;
         this.name = name;

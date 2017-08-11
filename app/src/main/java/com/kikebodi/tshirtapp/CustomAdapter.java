@@ -6,7 +6,6 @@ package com.kikebodi.tshirtapp;
  * bodi.inf@gmail.com
  */
 
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kikebodi.tshirtapp.apiconnection.models.Tshirt;
+import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    private List<Tshirt> itemsList;
+    private List<Shirt> itemsList;
     private ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
 
 
@@ -32,12 +31,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             price = (TextView) view.findViewById(R.id.price);
-            color = (TextView) view.findViewById(R.id.color);
             image = (ImageView) view.findViewById(R.id.imageView);
         }
     }
 
-    public CustomAdapter(List<Tshirt> itemsList) {
+    public CustomAdapter(List<Shirt> itemsList) {
         this.itemsList = itemsList;
     }
 
@@ -45,16 +43,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.shirt_card_view, parent, false);
-
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Tshirt item = itemsList.get(position);
+        Shirt item = itemsList.get(position);
         holder.title.setText(item.getName());
         holder.price.setText("$"+String.valueOf(item.getPrice()));
         imageLoader.displayImage(item.getPicture(), holder.image);
+
     }
 
     @Override

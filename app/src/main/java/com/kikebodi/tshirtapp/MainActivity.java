@@ -1,55 +1,53 @@
 package com.kikebodi.tshirtapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.kikebodi.tshirtapp.apiconnection.ApiConnectionManager;
-import com.kikebodi.tshirtapp.apiconnection.models.Tshirt;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Tshirt> itemList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private CustomAdapter mAdapter;
+    private static final String TAG = MainActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         // Create global configuration and initialize ImageLoader with this config
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mAdapter = new CustomAdapter(itemList);
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),1);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-        
-        //prepareItems();
-        ApiConnectionManager apiManager = new ApiConnectionManager(this);
-        apiManager.getTshirtsFromAPI();
+        setContentView(R.layout.activity_main);
+
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.your_placeholder, new ItemListFragment(), "Main fragment");
+        transaction.commit();
     }
 
-    public void prepareItems(List<Tshirt> list){
-        if(list == null) return;
-
-        for (Tshirt element : list) {
-            if(element.getQuantity() > 0){
-                itemList.add(element);
-            }
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (fragment instanceof ItemListFragment) {
+            ApiConnectionManager apiManager = new ApiConnectionManager(fragment);
+            apiManager.getTshirtsFromAPI();
         }
-        mAdapter.notifyDataSetChanged();
     }
+
+    // Handle back button at main fragment
+    @Override
+    public void onBackPressed() {
+        int count = getFragmentManager().getBackStackEntryCount();
+        if (count > 0) {
+            getFragmentManager().popBackStack();
+        }
+    }
+
 }
+
+

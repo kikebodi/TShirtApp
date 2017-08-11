@@ -1,11 +1,12 @@
 package com.kikebodi.tshirtapp.apiconnection;
 
+import android.app.Fragment;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kikebodi.tshirtapp.MainActivity;
-import com.kikebodi.tshirtapp.apiconnection.models.Tshirt;
+import com.kikebodi.tshirtapp.ItemListFragment;
+import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
 
 import java.util.List;
 
@@ -28,13 +29,13 @@ public class ApiConnectionManager {
     public static final String URL = "https://mock-shirt-backend.getsandbox.com/";
     private static final String TAG = ApiConnectionManager.class.getName();
     private final SandboxApi sandboxApi;
-    private MainActivity mainActivity;
+    private Fragment myFragment;
 
     //Test driven variables
     public static boolean successfullGetRequest  = false;
 
-    public ApiConnectionManager(MainActivity mActivity){
-        this.mainActivity = mActivity;
+    public ApiConnectionManager(Fragment myFragment){
+        this.myFragment = myFragment;
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                 .create();
@@ -55,21 +56,21 @@ public class ApiConnectionManager {
 
 
     public void getTshirtsFromAPI(){
-        Call<List<Tshirt>> call = sandboxApi.getTshirts();
-        call.enqueue(new Callback<List<Tshirt>>() {
+        Call<List<Shirt>> call = sandboxApi.getTshirts();
+        call.enqueue(new Callback<List<Shirt>>() {
             @Override
-            public void onResponse(Call<List<Tshirt>> call, Response<List<Tshirt>> response) {
+            public void onResponse(Call<List<Shirt>> call, Response<List<Shirt>> response) {
                 Log.d(TAG,"onSuccess");
                 successfullGetRequest = true;
                 int statusCode = response.code();
                 successfullGetRequest = (statusCode == 200);
 
-                List<Tshirt> tshirts = response.body();
-                mainActivity.prepareItems(tshirts);
+                List<Shirt> shirts = response.body();
+                ((ItemListFragment)myFragment).prepareItems(shirts);
             }
 
             @Override
-            public void onFailure(Call<List<Tshirt>> call, Throwable t) {
+            public void onFailure(Call<List<Shirt>> call, Throwable t) {
                 Log.d(TAG,"onFailure GET");
                 successfullGetRequest = false;
                 t.printStackTrace();
