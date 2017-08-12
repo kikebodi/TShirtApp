@@ -4,6 +4,7 @@ package com.kikebodi.tshirtapp.main_list;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,5 +65,18 @@ public class ItemListFragment extends Fragment {
         fragmentTransaction.replace(R.id.your_placeholder,newFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void showCheckoutSnackbar(){
+        Snackbar snackbar = Snackbar
+                .make(recyclerView, "Shirt added to the cart", Snackbar.LENGTH_LONG)
+                .setAction("Checkout", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //go to shopping cart fragment
+                    }
+                });
+
+        snackbar.show();
     }
 }

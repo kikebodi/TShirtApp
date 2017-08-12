@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
+
+
         setContentView(R.layout.activity_main);
 
         FragmentManager manager = getFragmentManager();

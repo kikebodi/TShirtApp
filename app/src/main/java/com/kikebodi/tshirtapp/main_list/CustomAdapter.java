@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kikebodi.tshirtapp.R;
+import com.kikebodi.tshirtapp.shopingcart.ShoppingCart;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -29,7 +30,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, price, color;
+        public TextView title, price;
         public ImageView image, cart;
 
         public MyViewHolder(View view) {
@@ -68,7 +69,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Utils.addToShoppingCart(item);
+                ShoppingCart.addToShoppingCart(item, parentFragment.getActivity());
+                parentFragment.showCheckoutSnackbar();
             }
         });
     }

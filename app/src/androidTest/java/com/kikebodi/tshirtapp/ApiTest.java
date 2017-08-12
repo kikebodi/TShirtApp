@@ -6,12 +6,14 @@ import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.kikebodi.tshirtapp.apiconnection.ApiConnectionManager;
+import com.kikebodi.tshirtapp.shopingcart.ShoppingCart;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -33,12 +35,12 @@ public class ApiTest {
         instrumentationContext = InstrumentationRegistry.getContext();
     }
 
-    @Test
+    /*@Test
     public void testGET() throws InterruptedException {
-        ApiConnectionManager apiManager = new ApiConnectionManager();
+        ApiConnectionManager apiManager = new ApiConnectionManager(instrumentationContext);
         apiManager.getTshirtsFromAPI();
 
         signal.await(3, TimeUnit.SECONDS);
         Assert.assertTrue(ApiConnectionManager.successfullGetRequest);
-    }
+    }*/
 }
