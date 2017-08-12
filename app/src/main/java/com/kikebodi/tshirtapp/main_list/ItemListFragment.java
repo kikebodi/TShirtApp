@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,23 +38,7 @@ public class ItemListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),recyclerView,new RecyclerItemClickListener.OnItemClickListener(){
-            @Override public void onItemClick(View view, int position) {
-                Log.d(TAG, "Clicked position "+position);
-                try{
-                    Shirt item = itemList.get(position);
-                    ShirtDetailFragment newFragment = new ShirtDetailFragment();
-                    newFragment.setShirt(item);
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.your_placeholder,newFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }));
-        mAdapter = new CustomAdapter(itemList);
+        mAdapter = new CustomAdapter(itemList, this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(),1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -71,5 +54,15 @@ public class ItemListFragment extends Fragment {
             }
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void changeFragment(int position) {
+        Shirt item = itemList.get(position);
+        ShirtDetailFragment newFragment = new ShirtDetailFragment();
+        newFragment.setShirt(item);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.your_placeholder,newFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

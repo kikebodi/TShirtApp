@@ -21,24 +21,29 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
+    private static final String TAG = CustomAdapter.class.getName();
+
     private List<Shirt> itemsList;
+    private ItemListFragment parentFragment;
     private ImageLoader imageLoader = ImageLoader.getInstance();
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, price, color;
-        public ImageView image;
+        public ImageView image, cart;
 
         public MyViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
             price = view.findViewById(R.id.price);
             image = view.findViewById(R.id.imageView);
+            cart = view.findViewById(R.id.shopingcart);
         }
     }
 
-    public CustomAdapter(List<Shirt> itemsList) {
+    public CustomAdapter(List<Shirt> itemsList, ItemListFragment parentFragment) {
         this.itemsList = itemsList;
+        this.parentFragment = parentFragment;
     }
 
     @Override
@@ -49,12 +54,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Shirt item = itemsList.get(position);
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        final Shirt item = itemsList.get(position);
         holder.title.setText(item.getName());
         holder.price.setText(String.format("$%s", String.valueOf(item.getPrice())));
         imageLoader.displayImage(item.getPicture(), holder.image);
-
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parentFragment.changeFragment(position);
+            }
+        });
+        holder.cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Utils.addToShoppingCart(item);
+            }
+        });
     }
 
     @Override
