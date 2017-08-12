@@ -37,7 +37,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             super(view);
             title = view.findViewById(R.id.title);
             price = view.findViewById(R.id.price);
-            image = view.findViewById(R.id.imageView);
+            image = view.findViewById(R.id.image);
             cart = view.findViewById(R.id.shopingcart);
         }
     }
@@ -63,7 +63,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                parentFragment.changeFragment(position);
+                parentFragment.changeToDetailsFragment(position);
             }
         });
         holder.cart.setOnClickListener(new View.OnClickListener() {

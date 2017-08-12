@@ -44,6 +44,15 @@ public class ShoppingCart {
         return true;
     }
 
+    public static void updateShoppingCartList(List<Shirt> myList, Activity activity){
+        SharedPreferences mPrefs = activity.getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(myList);
+        prefsEditor.putString(SHOPPING_CART, json);
+        prefsEditor.apply();
+    }
+
     private static List<Shirt> updateList(List<Shirt> myList, Shirt item) {
         if(myList == null){
             myList = new ArrayList<>();
@@ -60,40 +69,5 @@ public class ShoppingCart {
         List<Shirt> myList = (List<Shirt>) gson.fromJson(json, listType);
         Log.d(TAG, "Items in the list: "+myList.size());
         return myList;
-    }
-
-    public class ItemCart{
-
-        private Shirt shirt;
-        private int quantity;
-
-        public ItemCart(Shirt shirt, int quantity){
-            this.shirt = shirt;
-            this.quantity = quantity;
-        }
-
-        public Shirt getShirt() {
-            return shirt;
-        }
-
-        public void setShirt(Shirt shirt) {
-            this.shirt = shirt;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-
-        public void addOne(){
-            this.quantity++;
-        }
-
-        public void removeOne(){
-            this.quantity--;
-        }
     }
 }

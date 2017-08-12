@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.kikebodi.tshirtapp.R;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
 import com.kikebodi.tshirtapp.details.ShirtDetailFragment;
+import com.kikebodi.tshirtapp.shopingcart.ShoppingCartFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +58,18 @@ public class ItemListFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    public void changeFragment(int position) {
+    public void changeToDetailsFragment(int position) {
         Shirt item = itemList.get(position);
         ShirtDetailFragment newFragment = new ShirtDetailFragment();
         newFragment.setShirt(item);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.your_placeholder,newFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void changeToCartFragment() {
+        ShoppingCartFragment newFragment = new ShoppingCartFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.your_placeholder,newFragment);
         fragmentTransaction.addToBackStack(null);
@@ -74,6 +83,7 @@ public class ItemListFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         //go to shopping cart fragment
+                        changeToCartFragment();
                     }
                 });
 
