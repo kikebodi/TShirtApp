@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kikebodi.tshirtapp.MainActivity;
 import com.kikebodi.tshirtapp.R;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -40,6 +41,9 @@ public class ShirtDetailFragment extends Fragment {
         colour.setText(item.getColour());
         price.setText(String.format("$%s", String.valueOf(item.getPrice())));
         size.setText(item.getSize().toUpperCase());
+
+        //In case of back key pressed, add shopping cart icon
+        ((MainActivity)getActivity()).setShoppingCartIconVisibility(true);
     }
 
     public void setShirt(Shirt item){

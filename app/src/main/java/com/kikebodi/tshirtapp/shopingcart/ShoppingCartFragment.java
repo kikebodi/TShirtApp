@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kikebodi.tshirtapp.MainActivity;
 import com.kikebodi.tshirtapp.R;
 import com.kikebodi.tshirtapp.apiconnection.ApiConnectionManager;
 import com.kikebodi.tshirtapp.apiconnection.models.Basket;
@@ -67,6 +68,7 @@ public class ShoppingCartFragment extends Fragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((MainActivity)getActivity()).setShoppingCartIconVisibility(false);
     }
 
     public void updateTotal(long total){

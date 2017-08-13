@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kikebodi.tshirtapp.MainActivity;
 import com.kikebodi.tshirtapp.R;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
 import com.kikebodi.tshirtapp.details.ShirtDetailFragment;
@@ -45,6 +46,9 @@ public class ItemListFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+        //In case of back key pressed, add shopping cart icon
+        ((MainActivity)getActivity()).setShoppingCartIconVisibility(true);
     }
 
     public void prepareItems(List<Shirt> list){
