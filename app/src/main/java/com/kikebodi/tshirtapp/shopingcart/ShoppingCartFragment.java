@@ -8,12 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kikebodi.tshirtapp.R;
+import com.kikebodi.tshirtapp.apiconnection.ApiConnectionManager;
+import com.kikebodi.tshirtapp.apiconnection.models.Basket;
+import com.kikebodi.tshirtapp.apiconnection.models.CreateOrder;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
-import com.kikebodi.tshirtapp.main_list.CustomAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -26,37 +29,51 @@ import java.util.List;
 
 public class ShoppingCartFragment extends Fragment{
 
-    List<Shirt> itemList;
     private RecyclerView recyclerView;
     private ItemCartAdapter mAdapter;
     private TextView total;
+    private Button payButton;
     private ImageLoader imageLoader = ImageLoader.getInstance();
+    private ShoppingCartFragment thisFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.thisFragment = this;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         total = view.findViewById(R.id.total);
+        payButton = view.findViewById(R.id.button);
         mAdapter = new ItemCartAdapter(this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(),1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<Shirt> myList = ShoppingCart.getShoppingCartItems(getActivity());
+                Basket basket = new Basket(myList);
+                ApiConnectionManager apiManager = new ApiConnectionManager();
+                CreateOrder createOrder = new CreateOrder(mAdapter.getTotalPrice(),basket);
+                apiManager.postOrderToAPI(createOrder, thisFragment);
+            }
+        });
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-/*        imageLoader.displayImage(item.getPicture(), image);
-        title.setText(item.getName());
-        price.setText(String.format("$%s", String.valueOf(item.getPrice())));
-        size.setText(item.getSize().toUpperCase());*/
     }
 
     public void updateTotal(long total){
         this.total.setText(String.format("$%s", String.valueOf(total)));
+    }
+
+    public void showToastOrderConfirmed(){
+        Toast.makeText(getActivity().getApplicationContext(),"Order confirmed", Toast.LENGTH_LONG).show();
     }
 }

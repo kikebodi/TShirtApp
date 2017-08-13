@@ -1,8 +1,6 @@
 package com.kikebodi.tshirtapp.shopingcart;
 
-import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,6 @@ import android.widget.TextView;
 
 import com.kikebodi.tshirtapp.R;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
-import com.kikebodi.tshirtapp.main_list.ItemListFragment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -80,7 +77,7 @@ public class ItemCartAdapter extends RecyclerView.Adapter<ItemCartAdapter.MyView
         return itemsList.size();
     }
 
-    private long getTotalPrice() {
+    public long getTotalPrice() {
         long total = 0;
         if(itemsList == null) return 0;
 

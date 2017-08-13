@@ -1,9 +1,7 @@
 package com.kikebodi.tshirtapp.shopingcart;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -12,10 +10,7 @@ import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import static android.content.Context.MODE_PRIVATE;
 

@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kikebodi.tshirtapp.R;
-import com.kikebodi.tshirtapp.shopingcart.ShoppingCart;
 import com.kikebodi.tshirtapp.apiconnection.models.Shirt;
+import com.kikebodi.tshirtapp.shopingcart.ShoppingCart;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;

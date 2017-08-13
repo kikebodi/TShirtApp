@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
         if (fragment instanceof ItemListFragment) {
-            ApiConnectionManager apiManager = new ApiConnectionManager(fragment);
-            apiManager.getTshirtsFromAPI();
+            ApiConnectionManager apiManager = new ApiConnectionManager();
+            apiManager.getTshirtsFromAPI(fragment);
         }
     }
 
