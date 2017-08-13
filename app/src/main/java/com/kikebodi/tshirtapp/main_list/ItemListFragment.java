@@ -67,7 +67,7 @@ public class ItemListFragment extends Fragment {
         ShirtDetailFragment newFragment = new ShirtDetailFragment();
         newFragment.setShirt(item);
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.your_placeholder,newFragment);
+        fragmentTransaction.replace(R.id.placeholder,newFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -75,7 +75,7 @@ public class ItemListFragment extends Fragment {
     public void changeToCartFragment() {
         ShoppingCartFragment newFragment = new ShoppingCartFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.your_placeholder,newFragment);
+        fragmentTransaction.replace(R.id.placeholder,newFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

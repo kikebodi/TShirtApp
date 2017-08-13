@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.your_placeholder, new ItemListFragment(), "Main fragment");
+        transaction.add(R.id.placeholder, new ItemListFragment(), "Main fragment");
         transaction.commit();
     }
 
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.cart_icon:
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.your_placeholder, new ShoppingCartFragment(), "Shopping cart")
+                        .replace(R.id.placeholder, new ShoppingCartFragment(), "Shopping cart")
                         .addToBackStack(null)
                         .commit();
                 return true;
